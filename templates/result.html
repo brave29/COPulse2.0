@@ -1,46 +1,128 @@
 <!DOCTYPE html>
-
 <html lang="en" dir="ltr">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Heart Disease Predictor</title>
-		<link rel="shortcut icon" href="{{ url_for('static', filename='diabetes-favicon.ico') }}">
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styleCoPulse.css') }}">
-		<script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
-		<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-	</head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heart Disease Predictor</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='diabetes-favicon.ico') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styleCoPulse.css') }}">
+  <script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    /* Color Palette */
+    :root {
+      --primary-color: #4CAF50; /* More professional green */
+      --secondary-color: #3498db;
+      --text-color: #2c3e50;
+      --background-color: #ecf0f1;
+      --accent-color: #16a085;
+      --hover-color: #1abc9c;
+      --border-color: #bdc3c7;
+    }
 
-    <body>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+    }
 
-  <div class="container" >
-       <img src="static/backgroundImg.jpg" alt="" style="float: right;" />
-    </div>
+    .header {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    .header .brand-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 2em;
+    }
+
+    .header .subtitle {
+      font-size: 1em;
+      margin-top: 5px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: flex-end;
+      padding: 15px;
+    }
+
+    .container img {
+      max-width: 40%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .results {
+      margin: 20px;
+      text-align: center;
+    }
+
+    .results h1,
+    .results h2 {
+      font-size: 1.5em;
+      color: var(--text-color);
+    }
+
+    .danger {
+      color: red;
+      font-weight: bold;
+    }
+
+    .safe {
+      color: green;
+      font-weight: bold;
+    }
+
+    .footer {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .footer-description {
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header Section -->
+  <header class="header">
+    <h1 class="brand-title">My CoPulse</h1>
+    <p class="subtitle">Transforming Health, One Pulse at a Time</p>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <img src="static/backgroundImg.jpg" alt="Heart Disease Image" />
   </div>
 
-		<!-- Result -->
-		<div class="results">
-			
-			{% if heartrate>50 %}
-				<h1>Your Digital Twin Heart Rate is : <span class='danger'>{% print(heartrate)%}</span></h1>
-			{% endif %}
+  <div class="results">
+    <!-- Heart Rate Display -->
+    {% if heartrate > 50 %}
+      <h1>Your Digital Twin Heart Rate is : <span class="danger">{{ heartrate }}</span></h1>
+    {% endif %}
 
+    <!-- Prediction Display -->
+    {% if prediction == 1 %}
+      <h2>Prediction: <span class="danger">WARNING ZONE - Please consult with a physician ASAP.</span></h2>
+    {% elif prediction == 0 %}
+      <h2>Prediction: <span class="safe">HEALTHY ZONE - You seem to be clear, but it is always recommended to check with your physician for a checkup.</span></h2>
+    {% endif %}
+  </div>
 
-			{% if prediction==1 %}
-			    
+  <!-- Footer Section -->
+  <div class="footer">
+    <p class="footer-description">COPulse - We are here for you!</p>
+  </div>
 
-				<h2>Prediction: <span class='danger'>WARNING ZONE - Please consult with physician ASAP.</span></h2>
-				
-			{% elif prediction==0 %}
-				<h2>Prediction: <span class='safe'>HEALTHY ZONE - You seem to be in clear, however, it is always recommended to check with your physician for checkup.</span></h2>
-				
-			{% endif %}
-		</div>
-
-		<!-- Footer --> gd
-       <div class='footer'>
-           <p class='footer-description'>COPulse - we are here for you !!!!</p>
-       </div>
-
-	</body>
+</body>
 </html>

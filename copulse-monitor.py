@@ -2,7 +2,7 @@ import pickle
 import numpy as np
 
 
-from fitbitapi import getMaxHeartRate, getMaxHeartRateFake
+from fitbitapi import getMaxHeartRate
 import time
 # Import the function from dbread.py
 from dbutils import readFileContent
@@ -14,7 +14,7 @@ model = pickle.load(open(filename, 'rb'))  # Load the model from the file system
 
 def readFileAndCheckForHeartDisease(fileName):
     print(f"Reading File {fileName}!")
-    maxHeartRate = getMaxHeartRate
+    maxHeartRate = getMaxHeartRate()
 
     data = readFileContent(fileName, maxHeartRate)
     print(f"data={data}")

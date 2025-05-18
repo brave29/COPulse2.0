@@ -1,118 +1,369 @@
 <!DOCTYPE html>
-
-<html lang="en" dir="ltr">
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My CoPulse - Transforming Health, One Pulse at a Time</title>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styleCoPulse.css') }}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My CoPulse – Transforming Health, One Pulse at a Time</title>
+
+  <!-- Google Fonts and Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="static/styleCoPulse.css">
+
+  <style>
+    /* Color Palette */
+    :root {
+      --primary-color: #4CAF50; /* More professional green */
+      --secondary-color: #3498db;
+      --text-color: #2c3e50;
+      --background-color: #ecf0f1;
+      --accent-color: #16a085;
+      --hover-color: #1abc9c;
+      --border-color: #bdc3c7;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    .header .brand-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 2em;
+    }
+
+    .header .subtitle {
+      font-size: 1em;
+      margin-top: 5px;
+    }
+
+    .form-wrapper {
+      margin: 20px;
+    }
+
+    .form-section {
+      margin-bottom: 25px;
+    }
+
+    .form-section h2 {
+      font-size: 1.6em;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+
+    label {
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+
+    .table-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    table {
+      width: 48%;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      margin-bottom: 15px;
+      margin-top: 0;
+    }
+
+    th, td {
+      padding: 8px 10px;
+      text-align: left;
+      font-size: 1em;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-size: 1.1em;
+    }
+
+    td input[type="text"], td select {
+      width: 100%;
+      max-width: 100px;
+      padding: 5px 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-size: 1em;
+    }
+
+    td input[type="text"]:focus, td select:focus {
+      outline-color: var(--accent-color);
+    }
+
+    td select {
+      min-width: 130px;
+    }
+
+    /* Alternating Row Colors for Manual Lab Tables */
+    .manual-lab-table tr:nth-child(odd) td {
+      background-color: #f2f9f4;
+    }
+
+    .manual-lab-table tr:nth-child(even) td {
+      background-color: #e6f4ea;
+    }
+
+    /* Submit Button */
+    .form-actions {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .btn-submit {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 12px 25px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--hover-color);
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- Website Title -->
+  <header class="header">
+    <h1 class="brand-title">My CoPulse</h1>
+    <p class="subtitle">Transforming Health, One Pulse at a Time</p>
+  </header>
 
-  <div class="container" >
-       <img src="static/backgroundImg.jpg" alt="" style="float: right;" />
-    </div>
-  </div>
-  <form action="{{ url_for('predict')}}" method="POST"> 
+  <main class="main-layout">
+    <form action="{{ url_for('predict') }}" method="POST" class="form-wrapper">
 
-  <!-- Text Area -->
-  <div class="ml-container1">
-    <br>
-  <div id="floatContainer1" class="float-container">
-    
-  <label for="digitaltwin">Activate Digital Twin?</label>
-    <input type="radio" id="digitaltwin-yes" name="digitaltwin" value="Yes" checked><b>Yes - Use My Digital Twin</b></input>
-  <input type="radio" id="digitaltwin-no" name="digitaltwin" value="No"><b>No, I will Input Manually</b></input><br><p></p>
+      <!-- Digital Twin Settings -->
+      <section class="form-section">
+        <h2>Digital Twin Settings</h2>
+        <div class="table-wrapper">
+          <table>
+            <tr>
+              <th>Activate Digital Twin?</th>
+              <td>
+                <label><input type="radio" name="digitaltwin" value="Yes" checked> Yes - Use My Digital Twin</label><br>
+                <label><input type="radio" name="digitaltwin" value="No"> No, I will Input Manually</label>
+              </td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <th>Enable Pro-active Monitoring?</th>
+              <td>
+                <label><input type="radio" name="monitor" value="Yes" checked> Yes - Monitor My Health</label><br>
+                <label><input type="radio" name="monitor" value="No"> No, Only Check Now</label>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </section>
 
-</div id="floatContainer1">
-<div id="floatContainer2" class="float-container">
-  <label for="activateDigitalTwin">Enable Pro-active Monitoring?</label>
-  <input type="radio" id="monitor-yes" name="monitor" value="Yes" checked><b>Yes - Monitor My health</b></input>
-  <input type="radio" id="monitor-no" name="monitor" value="No"><b>No, only check now</b></input><br>
-  <br>
-</div id="floatContainer2">
-</div class="ml-container1">
-<div class="ml-container2">
-      <h3>Your Lab Result Data (manual for now)</h3>
-      <label for="thalach">Enter Max Heart Rate</label>
-      <input type="text"  class="border border-dark border-5" id="thalach" name="thalach" value ='<Skip If Digital Twin selected>' placeholder="A number in range [71-202] bpm"><br>
+      <!-- Manual Lab Data Entry -->
+      <section class="form-section">
+        <h2>Manual Lab Data Entry</h2>
+        <div class="table-wrapper">
 
+          <!-- Table 1 -->
+          <table class="manual-lab-table">
+            <tr>
+              <th>Max Heart Rate</th>
+              <td><input type="text" id="thalach" name="thalach" placeholder="[71-202] bpm" maxlength="5"></td>
+            </tr>
+            <tr>
+              <th>Age</th>
+              <td><input type="text" id="age" name="age" value="23" maxlength="5"></td>
+            </tr>
+            <tr>
+              <th>Sex</th>
+              <td>
+                <select id="sex" name="sex">
+                  <option value="1">Male</option>
+                  <option value="0" selected>Female</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th>Chest Pain Type</th>
+              <td>
+                <select id="cp" name="cp">
+                  <option value="0" selected>Typical Angina</option>
+                  <option value="1">Atypical Angina</option>
+                  <option value="2">Non-anginal Pain</option>
+                  <option value="3">Asymptomatic</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th>Resting Blood Pressure</th>
+              <td><input type="text" id="trestbps" name="trestbps" placeholder="[94-200] mmHg" maxlength="5"></td>
+            </tr>
+            <tr>
+              <th>Serum Cholesterol</th>
+              <td><input type="text" id="chol" name="chol" placeholder="[126-564] mg/dl" value="220" maxlength="5"></td>
+            </tr>
+            <tr>
+              <th>Fasting Blood Sugar</th>
+              <td>
+                <select id="fbs" name="fbs">
+                  <option value="1" selected>Greater than 120 mg/dl</option>
+                  <option value="0">Less than 120 mg/dl</option>
+                </select>
+              </td>
+            </tr>
+          </table>
 
+          <!-- Table 2 -->
+          <table class="manual-lab-table">
+            <tr>
+              <th>Resting ECG Results</th>
+              <td>
+                <select id="restecg" name="restecg">
+                  <option value="1" selected>ST-T Wave Abnormality</option>
+                  <option value="2">Left Ventricular Hypertrophy</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th>Exercise-induced Angina</th>
+              <td>
+                <select id="exang" name="exang">
+                  <option value="1" selected>Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th>ST Depression</th>
+              <td><input type="text" id="oldpeak" name="oldpeak" placeholder="[0 - 6.2]" maxlength="5"></td>
+            </tr>
+            <tr>
+              <th>ST Segment Slope</th>
+              <td>
+                <select id="slope" name="slope">
+                  <option value="0" selected>Upsloping</option>
+                  <option value="1">Flat</option>
+                  <option value="2">Downsloping</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th>Major Vessels (CA)</th>
+              <td><input type="text" id="ca" name="ca" placeholder="[0-4]" maxlength="5"></td>
+            </tr>
+            <tr>
+              <th>Thalassemia</th>
+              <td>
+                <select id="thal" name="thal">
+                  <option value="0" selected>Normal</option>
+                  <option value="1">Fixed Defect</option>
+                  <option value="2">Reversible Defect</option>
+                </select>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </section>
 
-        <label for="age">Age</label>
-        <input type="text" id="age" name="age" placeholder="Your age.." value="23"><br>
-        <label for="sex">Sex</label>
-        <select id="sex" name="sex">
-          
-          <option value="1">Male</option>
-          <option value="0" selected>Female</option>
-        </select><br>
-        <label for="cp">Chest Pain Type</label>
-        <select id="cp" name="cp">
-          <option value="0" selected>Typical Angina</option>
-          <option value="1">Atypical Angina</option>
-          <option value="2">Non-anginal Pain</option>
-          <option value="3">Asymtomatic</option>
-        </select><br>
-        <label for="trestbps">Resting Blood Pressure</label>
-        <input type="text" id="trestbps" name="trestbps" placeholder="A number in range [94-200] mmHg"><br>
-
-        <label for="chol">Serum Cholesterol</label>
-        <input type="text" id="chol" name="chol" placeholder="A number in range [126-564] mg/dl" value="220"><br>
-        <label for="fbs">Fasting Blood Sugar</label>
-        <select id="fbs" name="fbs">
-          <option value="1" selected>Greater than 120 mg/dl</option>
-          <option value="0">Less than 120 mg/dl</option>
-        </select><br>
-        <label for="restecg">Resting ECG Results</label>
-        <select id="restecg" name="restecg">
-          <option value="1" selected>Having ST-T wave abnormality</option>
-          <option value="2">Probable or definite left ventricular
-            hypertrophy</option>
-        </select><br>
-        <label for="exang">Exercise-induced Angina</label>
-        <select id="exang" name="exang">
-          <option value="1" selected>Yes</option>
-          <option value="0">No</option>
-        </select><br>
-
-
-        <label for="oldpeak">ST depression</label>
-        <input type="text" id="oldpeak" name="oldpeak" placeholder="ST depression, typically in [0-6.2]"><br>
-
-
-
-        <label for="slope">slope of the peak exercise ST segment</label>
-        <select id="slope" name="slope">
-          <option value="0" selected>Upsloping</option>
-          <option value="1">Flat</option>
-          <option value="2">Downsloping</option>
-        </select><br>
-        
-
-        <label for="ca">Number of Major vessels</label>
-        <input type="text" id="ca" name="ca" placeholder="Typically in [0-4]"><br> 
-                          
-
-
-        <label for="thal">Thalassemia</label> 
-        <select id="thal" name="thal">
-          <option value="0" selected>Normal</option>
-          <option value="1">Fixed Defect</option> 
-          <option value="2">Reversible Defect</option>  
-        </select><br>
-
-      
-
-      <input type="submit" class="my-cta-button" value="Predict">
+      <div class="form-actions">
+        <button type="submit" class="btn-submit">Predict</button>
+      </div>
     </form>
-  </div>
-</body>
+    
+  </main>
 
+  <script>
+    // Adjust min-width of each select element based on its longest option
+    document.querySelectorAll('select').forEach(function(select) {
+      let maxOptionLength = 0;
+      select.querySelectorAll('option').forEach(function(option) {
+        maxOptionLength = Math.max(maxOptionLength, option.textContent.length);
+      });
+      select.style.minWidth = (maxOptionLength * 10) + 'px';
+    });
+     document.querySelector('form').addEventListener('submit', function(event) {
+    // Clear previous asterisks
+    document.querySelectorAll('.required-marker').forEach(marker => marker.remove());
+
+    const inputs = document.querySelectorAll('input[type="text"]');
+    const selects = document.querySelectorAll('select');
+    const radioGroups = ['digitaltwin', 'monitor'];
+    let isValid = true;
+
+    function markFieldInvalid(inputElement) {
+      const label = inputElement.closest('tr').querySelector('th');
+      if (label && !label.querySelector('.required-marker')) {
+        const asterisk = document.createElement('span');
+        asterisk.textContent = ' *';
+        asterisk.style.color = 'red';
+        asterisk.classList.add('required-marker');
+        label.appendChild(asterisk);
+      }
+    }
+
+    // Get the state of the "Enable Pro-active Monitoring" radio buttons
+    const isMonitoringEnabled = document.querySelector('input[name="monitor"]:checked').value === "Yes";
+
+    // Validate text fields
+    inputs.forEach(input => {
+      if (input.id === 'thalach' && isMonitoringEnabled) {
+        // Skip validation for "Max Heart Rate" if Pro-active Monitoring is enabled
+        return;
+      }
+
+      if (!input.value.trim()) {
+        isValid = false;
+        markFieldInvalid(input);
+      }
+    });
+
+    // Validate selects
+    selects.forEach(select => {
+      if (!select.value) {
+        isValid = false;
+        markFieldInvalid(select);
+      }
+    });
+
+    // Validate radio groups
+    radioGroups.forEach(name => {
+      const checked = document.querySelector(`input[name="${name}"]:checked`);
+      if (!checked) {
+        isValid = false;
+        const firstRadio = document.querySelector(`input[name="${name}"]`);
+        if (firstRadio) {
+          markFieldInvalid(firstRadio);
+        }
+      }
+    });
+
+    if (!isValid) {
+      alert("Please complete all required fields (marked with *).");
+      event.preventDefault();
+    }
+  });
+  </script>
+</body>
 </html>

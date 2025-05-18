@@ -15,7 +15,7 @@ import oauth2 as oauth2
 
 # Define the Fitbit token (authentication key) for secure API communication  
 # This token authenticates requests made to the Fitbit API  
-# use this link to generate - https://dev.fitbit.com/build/reference/web-api/troubleshooting-guide/oauth2-tutorial/
+# 11use this link to generate - https://dev.fitbit.com/build/reference/web-api/troubleshooting-guide/oauth2-tutorial/
 fitbit_token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyM1BTRloiLCJzdWIiOiJCNVRSQ0YiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyc29jIHJlY2cgcnNldCByaXJuIHJveHkgcnBybyBybnV0IHJzbGUgcmNmIHJhY3QgcmxvYyBycmVzIHJ3ZWkgcmhyIHJ0ZW0iLCJleHAiOjE3NDc1MjY1MTMsImlhdCI6MTc0NzQ5NzcxM30.4ccwoCQgXqxTqmzI4VwbpYv9kx-d4MQFl0FtaSZUBNs"  
 
 # Set the user ID for Fitbit API calls  
