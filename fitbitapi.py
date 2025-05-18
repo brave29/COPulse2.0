@@ -67,4 +67,4 @@ def getMaxHeartRate():
 
 
 print("program starting")
-getMaxHeartRate()
+#getMaxHeartRate()
