@@ -1,0 +1,15 @@
+Time=2025-04-11 17:39:47.847219
+Age=49
+sex=1
+cp=3
+trestbps=130
+chol=269
+fbs=1
+restecg=1
+thalach=129
+exang=1
+oldpeak=0.0
+slope=0
+ca=0
+thal=2
+done=true
